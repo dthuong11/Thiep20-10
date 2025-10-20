@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thiệp 20/10 - Mở quà 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(180deg,#ffe6ec,#fff);
+  font-family:'Poppins', sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* Màn đầu */
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition:opacity 1s ease;
+}
+h1{
+  font-size:38px;
+  color:#ff6b81;
+  margin-bottom:25px;
+  text-shadow:0 2px 6px rgba(255,107,129,0.3);
+}
+button{
+  font-size:22px;
+  padding:14px 34px;
+  background:#ff6b81;
+  border:none;
+  border-radius:14px;
+  color:#fff;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(255,107,129,0.4);
+  transition:transform 0.3s;
+}
+button:hover{transform:scale(1.1)}
+
+/* Màn thư */
+#main{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s ease;
+}
+
+/* Hiệu ứng tim */
+#hearts{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+}
+.heart{
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:#ff6b81;
+  transform:rotate(45deg);
+  animation:float 6s linear infinite;
+  opacity:0.8;
+}
+.heart::before,
+.heart::after{
+  content:'';
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:#ff6b81;
+  border-radius:50%;
+}
+.heart::before{top:-6px;left:0}
+.heart::after{left:-6px;top:0}
+@keyframes float{
+  0%{opacity:0;transform:translateY(0) scale(0.5) rotate(45deg);}
+  10%{opacity:1;}
+  100%{opacity:0;transform:translateY(-100vh) scale(1.3) rotate(45deg);}
+}
+
+/* Phong bì thư */
+.envelope{
+  position:relative;
+  width:380px;
+  height:auto;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  overflow:visible;
+  transform:scale(0);
+  animation:popUp 1s forwards 0.6s;
+  z-index:2;
+  padding-bottom:10px;
+}
+@keyframes popUp{
+  to{transform:scale(1);}
+}
+
+/* Nắp thư */
+.envelope::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100px;
+  background:linear-gradient(to bottom right,#ffd1dc,#ffb6c1);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  animation:openFlap 2s ease-in-out 2s forwards;
+}
+@keyframes openFlap{
+  to{transform:rotateX(180deg);}
+}
+
+/* Thư bên trong */
+.letter{
+  position:relative;
+  background:#fff;
+  border:2px dashed #ffb6c1;
+  border-radius:10px;
+  padding:40px 28px;
+  text-align:center;
+  margin-top:100px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity 1s ease, transform 1s ease;
+  box-shadow:0 4px 14px rgba(255,107,129,0.2);
+}
+.showLetter{
+  opacity:1;
+  transform:translateY(0);
+}
+.letter h2{
+  color:#ff6b81;
+  font-size:26px;
+  margin-bottom:12px;
+}
+.letter p{
+  color:#333;
+  font-size:18px;
+  line-height:1.7;
+  margin:0;
+  word-wrap:break-word;
+}
+
+/* Nhịp tim lớn */
+.big-heart{
+  position:absolute;
+  width:150px;
+  height:150px;
+  background:#ff6b81;
+  transform:rotate(45deg);
+  border-radius:20px;
+  opacity:0.25;
+  animation:beat 1.6s infinite ease-in-out;
+}
+.big-heart::before,
+.big-heart::after{
+  content:'';
+  position:absolute;
+  width:150px;
+  height:150px;
+  background:#ff6b81;
+  border-radius:50%;
+}
+.big-heart::before{top:-75px;left:0;}
+.big-heart::after{left:-75px;top:0;}
+@keyframes beat{
+  0%,100%{transform:rotate(45deg) scale(1);}
+  50%{transform:rotate(45deg) scale(1.15);}
+}
+</style>
+</head>
+<body>
+
+<!-- Màn mở đầu -->
+<div id="start" class="screen" style="opacity:1;">
+  <h1>💐 Chúc mừng ngày Phụ Nữ Việt Nam 20/10 💖</h1>
+  <button id="openBtn">🎁 Bấm vào đây 💌</button>
+</div>
+
+<!-- Màn thư -->
+<div id="main" class="screen">
+  <div id="hearts"></div>
+  <div class="big-heart"></div>
+  <div class="envelope">
+    <div class="letter" id="letter">
+      <h2>Gửi đến người phụ nữ tuyệt vời 💕</h2>
+      <p>
+       Người ta nói hoa đẹp vì có nắng còn em đẹp vì có nụ cười.<br>   Chúc em 20/10 ngập tràn niềm vui cùng với ước mơ nhỏ bé luôn thành hiện thực 💐<br>
+        Mong rằng nụ cười sẽ luôn nở trên môi
+        và niềm vui sẽ luôn bên em hạnh phúc mỗi ngày.<br><br>
+
+        Thân gửi cùng muôn vàn trái tim nhỏ 💌 —
+		Happy 20/10!
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+const btn = document.getElementById('openBtn');
+const start = document.getElementById('start');
+const main = document.getElementById('main');
+const letter = document.getElementById('letter');
+
+btn.addEventListener('click', ()=>{
+  start.style.opacity = '0';
+  setTimeout(()=>{
+    start.style.display='none';
+    main.style.opacity='1';
+    main.style.pointerEvents='auto';
+    createHearts();
+    setTimeout(()=>letter.classList.add('showLetter'), 2500);
+  }, 800);
+});
+
+function createHearts(){
+  const container=document.getElementById('hearts');
+  const total=60;
+  for(let i=0;i<total;i++){
+    const h=document.createElement('div');
+    h.className='heart';
+    h.style.left=Math.random()*100+'vw';
+    h.style.bottom='-10px';
+    h.style.animationDelay=Math.random()*6+'s';
+    h.style.animationDuration=5+Math.random()*4+'s';
+    h.style.background=`hsl(${Math.random()*30+340},80%,70%)`;
+    container.appendChild(h);
+  }
+}
+</script>
+</body>
+</html>
